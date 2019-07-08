@@ -8,7 +8,8 @@
 
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/reveal.css">
-        <link rel="stylesheet" href="css/theme/black.css">
+        <link rel="stylesheet" href="css/theme/moon.css">
+        <link rel="stylesheet" href="css/custom.css">
 
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="lib/css/monokai.css">
@@ -24,13 +25,334 @@
     </head>
     <body>
         <div class="reveal">
-            <div class="slides"></div>
+            <div class="slides">
+                <section>
+                    <section>
+                        <h1><code>useFlask()</code></h1>
+                    </section>
+                    <section>
+                        <h2><code>useFlask()</code></h2>
+                        <p class="large">
+                            ...or how to use a
+                            <img src="res/react-logo.svg" class="spin plain transparent inline" style="max-width: 1em;">
+                            <span class="colored">React</span>
+                            frontend for your Flask app
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>About me</h2>
+
+                        <div style="margin-bottom: 1em;">
+                            <p>👨‍💻 Lead Developer of the <a href="https://getindico.io">Indico project</a> at CERN</p>
+                            <p>
+                                🛠️ One of the <span class="colored">Pallets</span>
+                                <img src="res/pallets.png"
+                                     class="plain transparent inline"
+                                     style="max-width: 1em;">
+                                maintainers
+                            </p>
+                            <p>🐍 <span class="colored">Python</span> enthusiast since almost 10 years</p>
+                            <p>
+                                ✨ Moved on from jQuery to <span class="colored">React</span>
+                                <img src="res/react-logo.svg"
+                                     class="plain transparent inline"
+                                     style="max-width: 1em;">
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Find me on...</h2>
+                        <ul>
+                            <li>GitHub: <a href="https://github.com/ThiefMaster">@ThiefMaster</a></li>
+                            <li>Twitter: <a href="https://twitter.com/ThiefMaster">@ThiefMaster</a></li>
+                            <li>IRC: ThiefMaster @ Freenode (#pocoo, #indico)</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Status quo</h2>
+                        <p>Based on what people ask questions about on IRC</p>
+                        <ul>
+                            <li>WTForms</li>
+                            <li>jQuery</li>
+                            <li>AJAX</li>
+                            <li>JavaScript</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>WTForms</h2>
+                        <p>Easy for simple cases 🎉</p>
+                        <p>Complex custom widgets? Welcome to WTF-Forms</p>
+                        <ul>
+                            <li>Value round-trip even if validation fails!</li>
+                            <li>Garbage-in, garbage-out? 🗑️</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>jQuery</h2>
+                        <p>Do YOU still want to use it? 😜</p>
+                        <ul>
+                            <li>Spaghetti code</li>
+                            <li>Classes/IDs all over the code</li>
+                            <li>Barely maintainable</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>AJAX</h2>
+                        <p><code>XMLHttpRequest</code> API is horrible</p>
+                        <p><code>fetch()</code> isn't bad</p>
+                        <p>Are you sending back large chunks of HTML?</p>
+                        <p>Duplicating code for your API?</p>
+                    </section>
+                    <section>
+                        <h2>JavaScript</h2>
+                        <p>Rarely transpiled (sometimes minified)</p>
+                        <p>Code written for old browsers</p>
+                        <p>Why are you still writing the same kind of JS you wrote 10 years ago?</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>How to improve it?</h2>
+                        <ul>
+                            <li>Build asset bundle with Webpack</li>
+                            <li>Use modern JavaScript features (ES6+, ES201x)</li>
+                            <li>Make the frontend reactive <img src="res/react-logo.svg" class="spin plain transparent inline" style="max-width: 1em;"></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <blockquote>"Configuring webpack is too hard"</blockquote>
+                        <p>No, it's not. Unless you do weird things.<br><small>Been there, done that.</small></p>
+                        <p>But it <em>is</em> boilerplate code.</p>
+                    </section>
+
+                    <section>
+                        <p>Can't we do something like...</p>
+                        <p style="text-align: center;"><code class="colored">from webpack import config</code></p>
+                    </section>
+
+                    <section>
+                        <p>Almost!</p>
+                        <p>It's called <code class="colored">create-react-app</code></p>
+
+                        <blockquote>
+                            <small>
+                                Create React App is an officially supported way to create single-page React
+                                applications. It offers a modern build setup with <span class="colored">no configuration</span>.
+                            </small>
+                        </blockquote>
+                    </section>
+
+                    <section>
+                        <h2>create-react-app</h2>
+                        <p>Contains the whole build config</p>
+                        <p>Auto-rebuild & hot reload</p>
+                        <p>Includes its own dev server</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Let's code!</h2>
+                        <h2>👨‍💻</h2>
+                    </section>
+                    <section>
+                        <h2>Our Flask app</h2>
+                        <pre><code data-trim>
+                            app = Flask('__name__')
+
+                            @app.route('/api/time')
+                            def time():
+                                return jsonify(now=datetime.now().isoformat())
+
+
+                            @app.route('/api/greet/&lt;name&gt;')
+                            @app.route('/api/greet-stranger/', defaults={'name': 'mysterious person'})
+                            def greeting(name):
+                                msg = 'Welcome, ' + name
+                                return jsonify(greeting=msg)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Generate the client</h2>
+                        <pre><code data-trim class="shell">
+                            $ npx create-react-app client
+                            Creating a new React app in [...]/ep2019-flask-react/testapp/client.
+
+                            Installing packages. This might take a couple of minutes.
+                            Installing react, react-dom, and react-scripts...
+
+                            [...]
+
+                            We suggest that you begin by typing:
+
+                              cd client
+                              npm start
+
+                            Happy hacking!
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Export routes to JS</h2>
+                        <p>Hardcoded URLs are ugly!</p>
+                        <p>Especially if they are dynamic</p>
+                    </section>
+                    <section>
+                        <p>Install some more packages</p>
+                        <pre><code data-trim class="shell">
+                            $ pip install flask-url-map-serializer
+                            $ npm install --save-dev flask-urls.macro
+                            $ npm install --save flask-urls
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>Hook up the build scripts with Flask</p>
+                        <pre><code data-trim>
+                            // client/.babel-plugin-macrosrc.js
+                            const {execSync} = require('child_process');
+                            const urlMap = JSON.parse(execSync('flask url_map_to_json'));
+
+                            module.exports = {
+                              flaskURLs: {
+                                urlMap
+                              }
+                            };
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>Link the dev servers</p>
+                        <pre><code data-trim>
+                            // client/src/setupProxy.js
+                            const proxy = require('http-proxy-middleware');
+                            module.exports = app => {
+                              app.use(proxy('/api', {
+                                target: process.env.FLASK_URL || 'http://127.0.0.1:5000'
+                              }));
+                            };
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Recap</h2>
+                        <p>We now have:</p>
+                        <ul>
+                            <li>Our Flask app providing an API</li>
+                            <li>Boilerplate for a React frontend</li>
+                            <li>The ability to build Flask URLs in JS</li>
+                            <li>The CRA dev server forwarding <code>/api/*</code> to Flask</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <pre><code data-trim data-line-numbers="1,3,10" class="jsx">
+                            // client/src/App.js
+                            // ...
+                            import Demo from './Demo';
+
+                            function App() {
+                              return (
+                                {/* ... */}
+                                <header className="App-header">
+                                  <img src={logo} className="App-logo" alt="logo" />
+                                  &lt;Demo /&gt;
+                                </header>
+                                {/* ... */}
+                              );
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim data-line-numbers="1,3,5,6">
+                            // client/src/Demo.js
+                            import React, {useState, useEffect} from 'react';
+                            import flask from 'flask-urls.macro';
+
+                            const timeURL = flask`time`;
+                            const greetingURL = flask`greeting`;
+
+                            export default function Demo() {
+                              // continued on next slide
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <pre><code data-trim data-line-numbers class="jsx">
+                          const [time, setTime] = useState(null);
+                          useEffect(() => {
+                            (async () => {
+                              const resp = await fetch(timeURL());
+                              const data = await resp.json();
+                              setTime(data.now);
+                            })();
+                          }, []);
+
+                          const url = greetingURL({name: 'snake'});
+                          return time && (
+                            <p>It's {time} and your greeting URL is {url}</p>
+                          );
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p>How the hell does this all work?! 🤷‍♂️</p>
+
+                        <div style="display: flex;">
+                            <img src="res/magic.webp" class="plain fragment">
+                            <div style="flex-grow: 1;">
+                                <pre class="fragment unique"><code data-trim data-line-numbers="1,2" class="jsx">
+                                  // Babel macro - runs at build time!
+                                  import flask from 'flask-urls.macro';
+                                  // Tagged template compiles to function
+                                  const greetingURL = flask`greeting`;
+                                  // equivalent of url_for('greeting', name='snake')
+                                  const url = greetingURL({name: 'snake'});
+                                </code></pre>
+                                <pre class="fragment unique"><code data-trim data-line-numbers="3,4" class="jsx">
+                                  // Babel macro - runs at build time!
+                                  import flask from 'flask-urls.macro';
+                                  // Tagged template compiles to function
+                                  const greetingURL = flask`greeting`;
+                                  // equivalent of url_for('greeting', name='snake')
+                                  const url = greetingURL({name: 'snake'});
+                                </code></pre>
+                                <pre class="fragment unique"><code data-trim data-line-numbers="5,6" class="jsx">
+                                  // Babel macro - runs at build time!
+                                  import flask from 'flask-urls.macro';
+                                  // Tagged template compiles to function
+                                  const greetingURL = flask`greeting`;
+                                  // equivalent of url_for('greeting', name='snake')
+                                  const url = greetingURL({name: 'snake'});
+                                </code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <p>That's the code generated by the macro</p>
+
+                        <pre><code data-trim>
+                          const greetingURL = flask_urls__WEBPACK_IMPORTED_MODULE_1___default.a.bind(
+                            null,
+                            {
+                              endpoint: "greeting",
+                              rules: [/* ...building rules omitted here... */]
+                            },
+                            ""
+                          );
+                        </code></pre>
+                    </section>
+                </section>
+            </div>
         </div>
 
         <script src="js/reveal.js"></script>
-
         <script>
             Reveal.initialize({
+                hash: true,
                 dependencies: [
                     {src: 'plugin/notes/notes.js', async: true},
                     {src: 'plugin/highlight/highlight.js', async: true},

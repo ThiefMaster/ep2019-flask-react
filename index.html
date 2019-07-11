@@ -67,6 +67,10 @@
                              class="plain transparent inline"
                              style="max-width: 1em;">
                     </p>
+
+                    <aside class="notes">
+                        17yo project, hosted EP 2006 (show timetable?)
+                    </aside>
                 </section>
 
                 <section>
@@ -164,6 +168,7 @@
                         <pre><code data-trim>
                             app = Flask(__name__)
 
+
                             @app.route('/api/time')
                             def time():
                                 return jsonify(now=datetime.now().isoformat())
@@ -175,6 +180,10 @@
                                 msg = 'Welcome, ' + name
                                 return jsonify(greeting=msg)
                         </code></pre>
+
+                        <aside class="notes">
+                            simmple demo app, nothing special
+                        </aside>
                     </section>
                     <section>
                         <h2>Generate the client</h2>
@@ -194,11 +203,20 @@
 
                             Happy hacking!
                         </code></pre>
+
+                        <aside class="notes">
+                            hopefully recent node, explain what npx is
+                        </aside>
                     </section>
                     <section>
                         <h2>Export routes to JS</h2>
                         <p>Hardcoded URLs are ugly! 👎</p>
                         <p>Especially if they are dynamic 😠</p>
+
+                        <aside class="notes">
+                            changing only one place, unit tests might still pass,
+                            string concatenation? url encoding?
+                        </aside>
                     </section>
                     <section>
                         <p>📦 Install some more packages</p>
@@ -207,6 +225,10 @@
                             $ npm install --save-dev flask-urls.macro
                             $ npm install --save flask-urls
                         </code></pre>
+
+                        <aside class="notes">
+                            npm updates package json created by CRA
+                        </aside>
                     </section>
                     <section>
                         <p>🎣 Hook up the build scripts with Flask</p>
@@ -221,6 +243,10 @@
                               }
                             };
                         </code></pre>
+
+                        <aside class="notes">
+                            quick mention of macro plugin
+                        </aside>
                     </section>
                     <section>
                         <p>🔗 Link the dev servers</p>
@@ -233,6 +259,10 @@
                               }));
                             };
                         </code></pre>
+
+                        <aside class="notes">
+                            alternatives: CORS, nginx, but keeping it simple
+                        </aside>
                     </section>
                     <section>
                         <h2>Recap</h2>
@@ -261,6 +291,10 @@
                               );
                             }
                         </code></pre>
+
+                        <aside class="notes">
+                            file added by CRA, demo component like an html tag because jsx
+                        </aside>
                     </section>
                     <section>
                         <pre><code data-trim data-line-numbers="1,3,5,6">
@@ -275,6 +309,10 @@
                               // continued on next slide…
                             }
                         </code></pre>
+
+                        <aside class="notes">
+                            new file with custom component; defining flask url builders
+                        </aside>
                     </section>
                     <section>
                         <pre><code data-trim data-line-numbers class="jsx">
@@ -292,6 +330,11 @@
                             <p>It's {time} and your greeting URL is {url}</p>
                           );
                         </code></pre>
+
+                        <aside class="notes">
+                            react hooks store time & setter; effect runs once on mount (empty deps);
+                            calling builder; would work w/o params too
+                        </aside>
                     </section>
                     <section>
                         <p>How the hell does this all work?! 🤷‍♂️</p>
@@ -325,6 +368,12 @@
                                 </code></pre>
                             </div>
                         </div>
+
+                        <aside class="notes">
+                            importing <code>.macro</code> "activates" macro plugin;
+                            using as template tag passes AST node and triggers rewrite;
+                            calling like <code>url_for</code>
+                        </aside>
                     </section>
 
                     <section>
@@ -340,6 +389,10 @@
                             ""
                           );
                         </code></pre>
+
+                        <aside class="notes">
+                            show demo
+                        </aside>
                     </section>
                 </section>
 
@@ -369,6 +422,10 @@
                         </code></pre>
                         <p>Same features as the macro version</p>
                         <p>Alternative to the macro, but requires control over the Webpack/Babel config</p>
+
+                        <aside class="notes">
+                            before knowing macro plugin; discontinue?
+                        </aside>
                     </section>
 
                     <section>
@@ -380,6 +437,10 @@
                             Form handling & validation:
                             <a href="https://github.com/final-form/react-final-form">🏁 react-final-form</a>
                         </p>
+
+                        <aside class="notes">
+                            webargs marshmallow, also (de-)serialization
+                        </aside>
                     </section>
 
                     <section>
@@ -391,6 +452,10 @@
                             </a>
                         </p>
                         <p>Also covers how to build for production</p>
+
+                        <aside class="notes">
+                            show nicer demo
+                        </aside>
                     </section>
                 </section>
 

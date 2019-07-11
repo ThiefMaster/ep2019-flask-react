@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/theme/moon.css">
+        <link rel="stylesheet" href="css/fontawesome/css/all.css">
         <link rel="stylesheet" href="css/custom.css">
 
         <!-- Theme used for syntax highlighting of code -->
@@ -116,8 +117,8 @@
                     <section>
                         <h2>How to improve it?</h2>
                         <ul>
-                            <li>Build asset bundle with Webpack</li>
-                            <li>Use modern JavaScript features (ES6+, ES201x)</li>
+                            <li>Build asset bundle with Webpack <img src="res/webpack-logo.svg" class="plain transparent inline" style="max-width: 1em;"></li>
+                            <li>Use modern JavaScript (ES6+, ES201x) ✨</li>
                             <li>Make the frontend reactive <img src="res/react-logo.svg" class="spin plain transparent inline" style="max-width: 1em;"></li>
                         </ul>
                     </section>
@@ -196,11 +197,11 @@
                     </section>
                     <section>
                         <h2>Export routes to JS</h2>
-                        <p>Hardcoded URLs are ugly!</p>
-                        <p>Especially if they are dynamic</p>
+                        <p>Hardcoded URLs are ugly! 👎</p>
+                        <p>Especially if they are dynamic 😠</p>
                     </section>
                     <section>
-                        <p>Install some more packages</p>
+                        <p>Install some more packages 📦</p>
                         <pre><code data-trim class="shell">
                             $ pip install flask-url-map-serializer
                             $ npm install --save-dev flask-urls.macro
@@ -208,7 +209,7 @@
                         </code></pre>
                     </section>
                     <section>
-                        <p>Hook up the build scripts with Flask</p>
+                        <p>Hook up 🎣 the build scripts with Flask</p>
                         <pre><code data-trim>
                             // client/.babel-plugin-macrosrc.js
                             const {execSync} = require('child_process');
@@ -222,7 +223,7 @@
                         </code></pre>
                     </section>
                     <section>
-                        <p>Link the dev servers</p>
+                        <p>Link the dev servers 🔗</p>
                         <pre><code data-trim>
                             // client/src/setupProxy.js
                             const proxy = require('http-proxy-middleware');
@@ -345,12 +346,13 @@
                 <section>
                     <h2>You can contribute!</h2>
                     <p class="colored" style="text-align: center;">
-                        <a href="https://github.com/indico/js-flask-urls">indico/js-flask-urls @ GitHub</a>
+                        <i class="fab fa-sm fa-github"></i>
+                        <a href="https://github.com/indico/js-flask-urls">indico/js-flask-urls</a>
                     </p>
                     <p>We could really use...</p>
                     <p>🧾 Docs (only examples right now 😞)</p>
                     <p>✨ TypeScript stubs</p>
-                    <p><small>🖥️ More projects using it (and finding bugs?)</small></p>
+                    <p><small>🖥️ More projects using it (and finding bugs? 🐛)</small></p>
                     <p>➡️ Brag about having contributed to a CERN project! 🎉</p>
                 </section>
 
@@ -382,9 +384,10 @@
 
                     <section>
                         <p>More complete example of React-Flask integration</p>
-                        <p style="text-align: center;">
+                        <p class="colored" style="text-align: center;">
+                            <i class="fab fa-sm fa-github"></i>
                             <a href="https://github.com/ThiefMaster/flask-cra-example">
-                                ThiefMaster/flask-cra-example @ GitHub
+                                ThiefMaster/flask-cra-example
                             </a>
                         </p>
                         <p>Also covers how to build for production</p>
@@ -393,11 +396,14 @@
 
                 <section>
                     <h2>Find me on...</h2>
-                    <ul>
-                        <li>GitHub: <a href="https://github.com/ThiefMaster">@ThiefMaster</a></li>
-                        <li>Twitter: <a href="https://twitter.com/ThiefMaster">@ThiefMaster</a></li>
-                        <li>IRC: ThiefMaster @ Freenode (#pocoo, #indico)</li>
-                    </ul>
+                    <p>
+                        <i class="fab fa-sm fa-github"></i> <i class="fab fa-sm fa-twitter"></i>
+                        <span class="colored">@ThiefMaster</span>
+                    </p>
+                    <p>
+                        <i class="fab fa-sm fa-slack-hash" style="transform: rotate(19deg);"></i>
+                        <span class="colored">ThiefMaster</span> @ Freenode (#pocoo, #indico)
+                    </p>
                 </section>
             </div>
         </div>
